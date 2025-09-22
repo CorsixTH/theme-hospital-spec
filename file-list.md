@@ -86,7 +86,7 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>Anims/LOSE1.SMK</td>
 <td>SMK2</td>
-<td></td>
+<td>Palette embedded in video is used for newspaper font.</td>
 </tr>
 <tr>
 <td>Anims/LOSE2.SMK</td>
@@ -131,7 +131,7 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>Anims/WINLEVEL.SMK</td>
 <td>SMK2</td>
-<td></td>
+<td>Palette embedded in video is used for sprites drawn over it.</td>
 </tr>
 <tr>
 <td>Data/LANG-0.DAT</td>
@@ -1022,7 +1022,7 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>QData/LETTR02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>palette?; fax/letter widgets</td>
+<td>Final palette from WINLEVEL.SMK with Red/Blue swap; letter widgets</td>
 </tr>
 <tr>
 <td>QData/LETTR02V.TAB</td>
@@ -1302,7 +1302,7 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>QData/FONT39V.DAT</td>
 <td>Graphics/Chunks</td>
-<td></td>
+<td>Uses final palette from any LOSE#.SMK video</td>
 </tr>
 <tr>
 <td>QData/FONT39V.TAB</td>
@@ -1312,7 +1312,7 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>QData/FONT40V.DAT</td>
 <td>Graphics/Chunks</td>
-<td></td>
+<td>Uses final palette from any LOSE#.SMK video</td>
 </tr>
 <tr>
 <td>QData/FONT40V.TAB</td>
