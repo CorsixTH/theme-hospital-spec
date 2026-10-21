@@ -1804,12 +1804,30 @@ Many files are of the form "directory/filenameV.ext" and have sometimes counterp
 <tr>
 <td>QData/SPOINTER.DAT</td>
 <td>Graphics/Chunks</td>
-<td>QData/SPOINTER.TAB; palette varies by screen; various mouse cursors for special screens</td>
+<td>QData/SPOINTER.TAB; contains various mouse cursors which are used in the special screens</td>
 </tr>
 <tr>
 <td>QData/SPOINTER.TAB</td>
 <td>Spritetable</td>
-<td>QData/SPOINTER.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h); each pointer uses different palette</td>
+<td>QData/SPOINTER.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h); each pointer uses a different palette, depending on which screen they are used:<p></p>
+<ul>
+<li>0-1: QData/AREA01V.PAL or QData/BRIEF01V.PAL</li>
+<li>2-3: QData/PREF01V.PAL</li>
+<li>4-5: QData/DRUGN01V.PAL</li>
+<li>6-7: QData/FAX01V.PAL</li>
+<li>8-9: QData/GRAPH01V.PAL</li>
+<li>12-13: QData/TOWN01V.PAL</li>
+<li>14: QData/MAIN01M.PAL</li>
+<li>15-16: QData/BANK01V.PAL</li>
+<li>17-18: QData/POL01V.PAL</li>
+<li>19-20: QData/REP01V.PAL</li>
+<li>21-22: QData/RES01V.PAL</li>
+<li>23-24: QData/STAT01V.PAL</li>
+<li>25-26: QData/AWARD01V.PAL or QData/AWARD02V.PAL or QData/FAME01V.PAL</li>
+<li>27-28: QData/BID01V.PAL</li>
+<li>31-32: QData/STAFF01V.PAL or Data/MPALETTE.DAT</li>
+</ul>
+</td>
 </tr>
 <tr>
 <td>QData/STAFF01V.DAT</td>
@@ -1899,7 +1917,14 @@ Many files are of the form "directory/filenameV.ext" and have sometimes counterp
 <tr>
 <td>QDataM/FACE01M.DAT</td>
 <td>Graphics/Raw</td>
-<td>32 x 665; Data/MPALETTE.DAT; lowres staff portraits; 54 pieces (18 foreheads 14px, 18 faces 12px, 17 chins 11px, 1 chin 10px)</td>
+<td>32 x 665; Data/MPALETTE.DAT; lowres staff portraits; consists of 54 pieces, where each piece is 32 in width and the following height:<p></p>
+<ul>
+<li>first 18 images (foreheads): 14 px</li>
+<li>following 18 images (faces): 12 px</li>
+<li>following 17 images (chins): 11 px</li>
+<li>very last image (chin): 10 px</li>
+</ul>
+</td>
 </tr>
 <tr>
 <td>QDataM/FONT100M.DAT</td>
