@@ -2022,16 +2022,6 @@ Many files are of the form "directory/filenameV.ext" and have sometimes counterp
 <td>Italian sound samples (language 3)</td>
 </tr>
 <tr>
-<td>Sound/Data/Sound-3.dat</td>
-<td>Sound</td>
-<td>Italian sound samples (language 3)</td>
-</tr>
-<tr>
-<td>Sound/Data/Sound-4.dat</td>
-<td>Sound</td>
-<td>Spanish sound samples (language 4)</td>
-</tr>
-<tr>
 <td>Sound/Data/Sound-4.dat</td>
 <td>Sound</td>
 <td>Spanish sound samples (language 4)</td>
