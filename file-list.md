@@ -2004,42 +2004,42 @@ Many files are of the form "directory/filenameV.ext" and have sometimes counterp
 <tr>
 <td>Sound/Data/Sound-0.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>English sound samples (language 0)</td>
 </tr>
 <tr>
 <td>Sound/Data/Sound-1.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>French sound samples (language 1)</td>
 </tr>
 <tr>
 <td>Sound/Data/Sound-2.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>German sound samples (language 2)</td>
 </tr>
 <tr>
 <td>Sound/Data/Sound-3.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>Italian sound samples (language 3)</td>
 </tr>
 <tr>
 <td>Sound/Data/Sound-3.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>Italian sound samples (language 3)</td>
 </tr>
 <tr>
 <td>Sound/Data/Sound-4.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>Spanish sound samples (language 4)</td>
 </tr>
 <tr>
 <td>Sound/Data/Sound-4.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>Spanish sound samples (language 4)</td>
 </tr>
 <tr>
 <td>Sound/Data/Sound-5.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>Swedish sound samples (language 5)</td>
 </tr>
 <tr>
 <td>Sound/Midi/ATLANTIS.XMI</td>
