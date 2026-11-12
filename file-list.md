@@ -2,7 +2,7 @@
 
 Consider that some of these files might be RNC compressed. This list does not take account of that.
 
-Many files are of the form “directory/filenameV.ext” and have sometimes counterparts with “directoryM/filenameM.ext” or something like that. I guess that V stands for VGA (high-res graphics), whereas M denotes MCGA (low-res graphics – well, at least in TH language).
+Many files are of the form "directory/filenameV.ext" and have sometimes counterparts with "directoryM/filenameM.ext" or something like that. I guess that V stands for VGA (high-res graphics), whereas M denotes MCGA (low-res graphics – well, at least in TH language).
 
 <table class="table table-bordered table-condensed">
 <thead>
@@ -30,6 +30,11 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 </tr>
 <tr>
 <td>Anims/AREA04V.SMK</td>
+<td>SMK2</td>
+<td></td>
+</tr>
+<tr>
+<td>Anims/AREA05V.SMK</td>
 <td>SMK2</td>
 <td></td>
 </tr>
@@ -136,32 +141,32 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>Data/LANG-0.DAT</td>
 <td>Strings</td>
-<td>english strings</td>
+<td>english strings; uint16 section-count header, NUL-terminated strings</td>
 </tr>
 <tr>
 <td>Data/LANG-1.DAT</td>
 <td>Strings</td>
-<td>french strings</td>
+<td>french strings; uint16 section-count header, NUL-terminated strings</td>
 </tr>
 <tr>
 <td>Data/LANG-2.DAT</td>
 <td>Strings</td>
-<td>german strings</td>
+<td>german strings; uint16 section-count header, NUL-terminated strings</td>
 </tr>
 <tr>
 <td>Data/LANG-3.DAT</td>
 <td>Strings</td>
-<td>italian strings</td>
+<td>italian strings; uint16 section-count header, NUL-terminated strings</td>
 </tr>
 <tr>
 <td>Data/LANG-4.DAT</td>
 <td>Strings</td>
-<td>spanish strings</td>
+<td>spanish strings; uint16 section-count header, NUL-terminated strings</td>
 </tr>
 <tr>
 <td>Data/LANG-5.DAT</td>
 <td>Strings</td>
-<td>swedish strings</td>
+<td>swedish strings; uint16 section-count header, NUL-terminated strings</td>
 </tr>
 <tr>
 <td>Data/MONEY01V.DAT</td>
@@ -176,337 +181,335 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>Data/MPALETTE.DAT</td>
 <td>Palette</td>
-<td>the game’s main-palette; mouse cursors and ingame sprites use this palette</td>
+<td>the game's main palette; 256 RGB triples, 6-bit (0-63), 768 bytes; mouse cursors and ingame sprites use this palette; entry 255 transparent</td>
 </tr>
 <tr>
 <td>Data/MPOINTER.DAT</td>
 <td>Graphics/Chunks</td>
-<td>Data/MPALETTE.DAT; contains various mouse cursors</td>
+<td>Data/MPOINTER.TAB; Data/MPALETTE.DAT; mouse cursor sprites (simple chunks)</td>
 </tr>
 <tr>
 <td>Data/MPOINTER.TAB</td>
 <td>Spritetable</td>
-<td>Data/MPOINTER.DAT</td>
+<td>Data/MPOINTER.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>Data/PANEL02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>graphics for the main panel at the bottom</td>
+<td>Data/PANEL02V.TAB; Data/MPALETTE.DAT; bottom-panel UI sprites (complex chunks)</td>
 </tr>
 <tr>
 <td>Data/PANEL02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>Data/PANEL02V.DAT</td>
 </tr>
 <tr>
 <td>Data/PANEL04V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>panel-graphics for the rat shoot levels</td>
+<td>Data/PANEL04V.TAB; Data/MPALETTE.DAT; panel graphics for the rat-shoot levels (unused by CorsixTH — verify from binary)</td>
 </tr>
 <tr>
 <td>Data/PANEL04V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>Data/PANEL04V.DAT</td>
 </tr>
 <tr>
 <td>Data/PULLDV.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>Data/PULLDV.TAB; Data/MPALETTE.DAT; pull-down menu sprites (complex chunks)</td>
 </tr>
 <tr>
 <td>Data/PULLDV.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>Data/PULLDV.DAT</td>
 </tr>
 <tr>
 <td>Data/P_COMP.LEX</td>
 <td></td>
-<td>don’t know what the lex files are…; <del>it’s noticable that they are all exactly 2,000 bytes big;</del> th loads them at startup; update: this has something to do with the patients movement. if this file is all 0x00’s, patients don’t move any more (P = patients ?)</td>
+<td>patient-movement related (unverified); 2000 bytes; not loaded by CorsixTH; format undetermined</td>
 </tr>
 <tr>
 <td>Data/S_COMP.LEX</td>
 <td></td>
-<td>this has something to do with the staffs movement. if this file is all 0x00’s, staff don’t move any more (S = staff ?)</td>
+<td>staff-movement related (unverified); 2000 bytes; not loaded by CorsixTH; format undetermined</td>
 </tr>
 <tr>
 <td>Data/VBLK-0.DAT</td>
 <td>Graphics/Chunks</td>
-<td>Data/VBLK-0.TAB; map-/floor-tiles</td>
+<td>Data/VBLK-0.TAB; Data/MPALETTE.DAT; map/floor/wall tiles (simple chunks); level layers map via tile_map[] (WINMAIN.EXE:0xA83E0)</td>
 </tr>
 <tr>
 <td>Data/VBLK-0.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>Data/VBLK-0.DAT</td>
 </tr>
 <tr>
 <td>Data/VELE-1.ANI</td>
 <td>Animation/Spriteelement</td>
-<td></td>
+<td>6 bytes/entry (uint16 tab-pos, offX, offY, layer/flags, layerid)</td>
 </tr>
 <tr>
 <td>Data/VFRA-1.ANI</td>
 <td>Animation/Frame</td>
-<td></td>
+<td>10 bytes/entry (uint32 list index, w, h, sound, flags, uint16 next)</td>
 </tr>
 <tr>
 <td>Data/VLIST-1.ANI</td>
 <td>Animation/List</td>
-<td></td>
+<td>uint16 element indices, 0xFFFF terminates each frame's list</td>
 </tr>
 <tr>
 <td>Data/VSPR-0.DAT</td>
 <td>Graphics/Chunks</td>
-<td></td>
+<td>Data/VSPR-0.TAB; Data/MPALETTE.DAT; entity/object sprites (simple chunks)</td>
 </tr>
 <tr>
 <td>Data/VSPR-0.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>Data/VSPR-0.DAT</td>
 </tr>
 <tr>
 <td>Data/VSTART-1.ANI</td>
 <td>Animation/Start</td>
-<td></td>
+<td>4 bytes/animation: uint16LE first-frame index (engine reads 4, not the spec's 8)</td>
 </tr>
 <tr>
 <td>Data/WATCH01V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>Data/WATCH01V.TAB; Data/MPALETTE.DAT; graphics for the hospital-opening-countdown clock</td>
+<td>Data/WATCH01V.TAB; Data/MPALETTE.DAT; hospital-opening countdown-clock sprites (complex chunks)</td>
 </tr>
 <tr>
 <td>Data/WATCH01V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>Data/WATCH01V.DAT</td>
 </tr>
 <tr>
 <td>DataM/MBLK-0.DAT</td>
 <td>Graphics/Chunks</td>
-<td>lowres map-tiles</td>
+<td>DataM/MBLK-0.TAB; Data/MPALETTE.DAT; lowres map/floor tiles (simple chunks); equivalent to VBLK-0.DAT for MCGA mode</td>
 </tr>
 <tr>
 <td>DataM/MBLK-0.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>DataM/MBLK-0.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>DataM/MELE-1.ANI</td>
 <td>Animation/Spriteelement</td>
-<td></td>
+<td>6 bytes/entry (uint16 tab-pos, offX, offY, layer/flags, layerid); lowres sprite elements</td>
 </tr>
 <tr>
 <td>DataM/MFRA-1.ANI</td>
 <td>Animation/Frame</td>
-<td>note that these frames are not rendered correctly with my framerender-algorithm</td>
+<td>10 bytes/entry (uint32 list index, w, h, sound, flags, uint16 next); note: frames not rendered correctly with CorsicTH framerender-algorithm</td>
 </tr>
 <tr>
 <td>DataM/MLIST-1.ANI</td>
 <td>Animation/List</td>
-<td></td>
+<td>uint16 element indices, 0xFFFF terminates each frame's list; lowres animation lists</td>
 </tr>
 <tr>
 <td>DataM/MONEY01M.DAT</td>
 <td>Graphics/Chunks</td>
-<td>contains a stylized bank note</td>
+<td>DataM/MONEY01M.TAB; Data/MPALETTE.DAT; contains a stylized bank note (lowres)</td>
 </tr>
 <tr>
 <td>DataM/MONEY01M.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>DataM/MONEY01M.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>DataM/MPOINTER.DAT</td>
 <td>Graphics/Chunks</td>
-<td>lowres mousepointer graphics</td>
+<td>DataM/MPOINTER.TAB; Data/MPALETTE.DAT; lowres mousepointer graphics (simple chunks)</td>
 </tr>
 <tr>
 <td>DataM/MPOINTER.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>DataM/MPOINTER.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>DataM/MSPR-0.DAT</td>
 <td>Graphics/Chunks</td>
-<td>lowres sprites</td>
+<td>DataM/MSPR-0.TAB; Data/MPALETTE.DAT; lowres entity/object sprites (simple chunks); MCGA sprite sheet</td>
 </tr>
 <tr>
 <td>DataM/MSPR-0.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>DataM/MSPR-0.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>DataM/MSTART-1.ANI</td>
 <td>Animation/Start</td>
-<td>note that these are not rendered correctly with my animation-render-algorithm</td>
+<td>4 bytes/animation: uint16LE first-frame index (engine reads 4, not the spec's 8); lowres animation start indices</td>
 </tr>
 <tr>
 <td>DataM/MUTTON01.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>various buttons</td>
+<td>DataM/MUTTON01.TAB; Data/MPALETTE.DAT; various buttons (lowres); complex chunks</td>
 </tr>
 <tr>
 <td>DataM/MUTTON01.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>DataM/MUTTON01.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>DataM/PANEL02M.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>lowres panel graphics</td>
+<td>DataM/PANEL02M.TAB; Data/MPALETTE.DAT; lowres panel graphics (complex chunks)</td>
 </tr>
 <tr>
 <td>DataM/PANEL02M.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>DataM/PANEL02M.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>DataM/PULLDM.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>DataM/PULLDM.TAB; Data/MPALETTE.DAT; lowres pull-down menu sprites (complex chunks)</td>
 </tr>
 <tr>
 <td>DataM/PULLDM.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>DataM/PULLDM.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>DataM/WATCH01M.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>lowres countdown clock</td>
+<td>DataM/WATCH01M.TAB; Data/MPALETTE.DAT; lowres countdown clock (complex chunks)</td>
 </tr>
 <tr>
 <td>DataM/WATCH01M.TAB</td>
 <td>Spritetable</td>
-<td></td>
-</tr>
-<tr>
-<td>Levels/easy00.sam</td>
+<td>DataM/WATCH01M.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
+</tr>Levels/easy00.sam</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>Levels/easy01.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 2 (Easy); RNC compressed; 3.4 KB</td>
 </tr>
 <tr>
 <td>Levels/easy02.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 3 (Easy); RNC compressed; 4.9 KB</td>
 </tr>
 <tr>
 <td>Levels/easy03.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 4 (Easy); RNC compressed; 7.1 KB</td>
 </tr>
 <tr>
 <td>Levels/easy04.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 5 (Easy); RNC compressed; 7.4 KB</td>
 </tr>
 <tr>
 <td>Levels/easy05.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 6 (Easy); RNC compressed; 7.9 KB</td>
 </tr>
 <tr>
 <td>Levels/easy06.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 7 (Easy); RNC compressed; 7.9 KB</td>
 </tr>
 <tr>
 <td>Levels/easy07.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 8 (Easy); RNC compressed; 9.0 KB</td>
 </tr>
 <tr>
 <td>Levels/easy08.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 9 (Easy); RNC compressed; 10.2 KB</td>
 </tr>
 <tr>
 <td>Levels/easy09.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 10 (Easy); RNC compressed; 10.9 KB</td>
 </tr>
 <tr>
 <td>Levels/easy10.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 11 (Easy); RNC compressed; 11.0 KB</td>
 </tr>
 <tr>
 <td>Levels/easy11.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 12 (Easy); RNC compressed; 12.1 KB</td>
 </tr>
 <tr>
 <td>Levels/easy12.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 13 (Easy); RNC compressed; 12.4 KB</td>
 </tr>
 <tr>
 <td>Levels/FULL00.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 1 (Full); RNC compressed; 31.1 KB; full campaign start</td>
 </tr>
 <tr>
 <td>Levels/FULL01.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 2 (Full); RNC compressed; 3.4 KB</td>
 </tr>
 <tr>
 <td>Levels/FULL02.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 3 (Full); RNC compressed; 4.9 KB</td>
 </tr>
 <tr>
 <td>Levels/FULL03.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 4 (Full); RNC compressed; 7.1 KB</td>
 </tr>
 <tr>
 <td>Levels/FULL04.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 5 (Full); RNC compressed; 7.4 KB</td>
 </tr>
 <tr>
 <td>Levels/FULL05.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 6 (Full); RNC compressed; 8.1 KB</td>
 </tr>
 <tr>
 <td>Levels/FULL06.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 7 (Full); RNC compressed; 8.6 KB</td>
 </tr>
 <tr>
 <td>Levels/FULL07.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 8 (Full); RNC compressed; 9.0 KB</td>
 </tr>
 <tr>
 <td>Levels/FULL08.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 9 (Full); RNC compressed; 10.2 KB</td>
 </tr>
 <tr>
 <td>Levels/FULL09.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 10 (Full); RNC compressed; 10.9 KB</td>
 </tr>
 <tr>
 <td>Levels/FULL10.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 11 (Full); RNC compressed; 10.9 KB</td>
 </tr>
 <tr>
 <td>Levels/FULL11.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 12 (Full); RNC compressed; 12.1 KB</td>
 </tr>
 <tr>
 <td>Levels/FULL12.SAM</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 13 (Full); RNC compressed; 12.4 KB</td>
 </tr>
 <tr>
 <td>Levels/NET00.SAM</td>
@@ -606,212 +609,287 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>Levels/LEVEL.L1</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 1; RNC compressed; 2.8 KB; level descriptor</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L40</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 40; RNC compressed; 5.3 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L10</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 10; RNC compressed; 3.5 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L5</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 5; RNC compressed; 3.4 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L6</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 6; RNC compressed; 3.6 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L7</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 7; RNC compressed; 3.6 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L8</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 8; RNC compressed; 3.0 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L9</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 9; RNC compressed; 3.8 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L11</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 11; RNC compressed; 3.9 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L12</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 12; RNC compressed; 4.8 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L13</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 13; RNC compressed; 5.0 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L14</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 14; RNC compressed; 4.9 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L2</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 2; RNC compressed; 2.9 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L20</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 20; RNC compressed; 4.3 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L21</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 21; RNC compressed; 3.5 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L22</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 22; RNC compressed; 3.0 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L23</td>
 <td>Level</td>
-<td></td>
-</tr>
-<tr>
-<td>Levels/LEVEL.L24</td>
-<td>Level</td>
-<td></td>
+<td>Level descriptor 23; RNC compressed; 3.3 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L3</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 3; RNC compressed; 2.9 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L30</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 30; RNC compressed; 4.0 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L31</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 31; RNC compressed; 5.4 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L32</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 32; RNC compressed; 4.4 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L33</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 33; RNC compressed; 4.4 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L34</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 34; RNC compressed; 4.4 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L4</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 4; RNC compressed; 3.0 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L41</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 41; RNC compressed; 5.6 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L42</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 42; RNC compressed; 5.6 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L43</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 43; RNC compressed; 5.8 KB</td>
 </tr>
 <tr>
 <td>Levels/LEVEL.L44</td>
 <td>Level</td>
-<td></td>
+<td>Level descriptor 44; RNC compressed; 5.8 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L2</td>
+<td>Level</td>
+<td>Level descriptor 2; RNC compressed; 2.9 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L20</td>
+<td>Level</td>
+<td>Level descriptor 20; RNC compressed; 4.3 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L21</td>
+<td>Level</td>
+<td>Level descriptor 21; RNC compressed; 3.5 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L22</td>
+<td>Level</td>
+<td>Level descriptor 22; RNC compressed; 3.0 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L23</td>
+<td>Level</td>
+<td>Level descriptor 23; RNC compressed; 3.3 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L3</td>
+<td>Level</td>
+<td>Level descriptor 3; RNC compressed; 2.9 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L30</td>
+<td>Level</td>
+<td>Level descriptor 30; RNC compressed; 4.0 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L31</td>
+<td>Level</td>
+<td>Level descriptor 31; RNC compressed; 5.4 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L32</td>
+<td>Level</td>
+<td>Level descriptor 32; RNC compressed; 4.4 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L33</td>
+<td>Level</td>
+<td>Level descriptor 33; RNC compressed; 4.4 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L34</td>
+<td>Level</td>
+<td>Level descriptor 34; RNC compressed; 4.4 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L4</td>
+<td>Level</td>
+<td>Level descriptor 4; RNC compressed; 3.0 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L41</td>
+<td>Level</td>
+<td>Level descriptor 41; RNC compressed; 5.6 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L42</td>
+<td>Level</td>
+<td>Level descriptor 42; RNC compressed; 5.6 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L43</td>
+<td>Level</td>
+<td>Level descriptor 43; RNC compressed; 5.8 KB</td>
+</tr>
+<tr>
+<td>Levels/LEVEL.L44</td>
+<td>Level</td>
+<td>Level descriptor 44; RNC compressed; 5.8 KB</td>
 </tr>
 <tr>
 <td>Levels/hard00.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 1 (Hard); RNC compressed; 31.1 KB; hard campaign start</td>
 </tr>
 <tr>
 <td>Levels/hard01.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 2 (Hard); RNC compressed; 3.4 KB</td>
 </tr>
 <tr>
 <td>Levels/hard02.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 3 (Hard); RNC compressed; 4.9 KB</td>
 </tr>
 <tr>
 <td>Levels/hard03.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 4 (Hard); RNC compressed; 7.1 KB</td>
 </tr>
 <tr>
 <td>Levels/hard04.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 5 (Hard); RNC compressed; 7.4 KB</td>
 </tr>
 <tr>
 <td>Levels/hard05.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 6 (Hard); RNC compressed; 8.1 KB</td>
 </tr>
 <tr>
 <td>Levels/hard06.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 7 (Hard); RNC compressed; 8.7 KB</td>
 </tr>
 <tr>
 <td>Levels/hard07.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 8 (Hard); RNC compressed; 9.0 KB</td>
 </tr>
 <tr>
 <td>Levels/hard08.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 9 (Hard); RNC compressed; 10.2 KB</td>
 </tr>
 <tr>
 <td>Levels/hard09.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 10 (Hard); RNC compressed; 10.9 KB</td>
 </tr>
 <tr>
 <td>Levels/hard10.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 11 (Hard); RNC compressed; 11.0 KB</td>
 </tr>
 <tr>
 <td>Levels/hard11.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 12 (Hard); RNC compressed; 12.1 KB</td>
 </tr>
 <tr>
 <td>Levels/hard12.sam</td>
-<td></td>
-<td></td>
+<td>Level</td>
+<td>Mission 13 (Hard); RNC compressed; 12.4 KB</td>
 </tr>
 <tr>
 <td>QData/AREA01V.DAT</td>
@@ -821,7 +899,7 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>QData/AREA01V.PAL</td>
 <td>Palette</td>
-<td>QData/AREA01V.DAT</td>
+<td>QData/AREA01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/AWARD01V.DAT</td>
@@ -831,7 +909,7 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>QData/AWARD01V.PAL</td>
 <td>Palette</td>
-<td>QData/AWARD01V.DAT</td>
+<td>QData/AWARD01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/AWARD02V.DAT</td>
@@ -841,213 +919,207 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>QData/AWARD02V.PAL</td>
 <td>Palette</td>
-<td>QData/AWARD02V.DAT</td>
+<td>QData/AWARD02V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/AWARD03V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>QData/AWARD01V.PAL or QData/AWARD02V.PAL; widget-graphics for the awards-screen</td>
+<td>QData/AWARD03V.TAB; QData/AWARD01V.PAL or QData/AWARD02V.PAL; widget-graphics for the awards-screen</td>
 </tr>
 <tr>
 <td>QData/AWARD03V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/AWARD03V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/BANK01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>640 x 480; bank-screen background</td>
+<td>640 x 480; QData/BANK01V.PAL; bank-screen background</td>
 </tr>
 <tr>
 <td>QData/BANK01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/BANK01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/BANK02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>bank-screen graphics</td>
+<td>QData/BANK02V.TAB; QData/BANK01V.PAL; bank-screen graphics (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/BANK02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/BANK02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/BID01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>640 x 480; seems to be an auction screen. i have never seen this ingame, so it’s either multiplayer stuff or was not included in the final version</td>
+<td>640 x 480; QData/BID01V.PAL; seems to be an auction screen (unused in final version)</td>
 </tr>
 <tr>
 <td>QData/BID01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/BID01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/BID02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>QData/BID02V.TAB; QData/BID01V.PAL; auction screen widgets (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/BID02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/BID02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/BRIEF01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>640 x 480; briefing background; same as AREA01V but slightly darker</td>
+<td>640 x 480; QData/BRIEF01V.PAL; briefing background; same as AREA01V but slightly darker</td>
 </tr>
 <tr>
 <td>QData/BRIEF01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/BRIEF01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/CRED01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>640 x 480; credits/startscreen background (doctor with the chainsaw)</td>
+<td>640 x 480; QData/CRED01V.PAL; credits/startscreen background (doctor with the chainsaw)</td>
 </tr>
 <tr>
 <td>QData/CRED01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/CRED01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/DRUGN01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>the drugs research screen background</td>
+<td>640 x 480; QData/DRUGN01V.PAL; drugs research screen background</td>
 </tr>
 <tr>
 <td>QData/DRUGN01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/DRUGN01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/DRUGN02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>drugs screen widgets</td>
+<td>QData/DRUGN02V.TAB; QData/DRUGN01V.PAL; drugs screen widgets (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/DRUGN02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/DRUGN02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/FACE01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>65 x 1350; data/mpalette.dat; this file contains the staff’s potraits. it consits of 54 pieces, where each piece is 65 in width and has the following height:<p></p>
-<ul>
-<li>first 18 images (foreheads): 29 px</li>
-<li>following 18 images (faces): 24 px</li>
-<li>last 18 iamges (chins): 22 px</li>
-</ul>
-</td>
+<td>65 x 1350; Data/MPALETTE.DAT; staff portraits; 54 pieces (18 foreheads 29px, 18 faces 24px, 18 chins 22px)</td>
 </tr>
 <tr>
 <td>QData/FAME01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>640 x 480; highscore background</td>
+<td>640 x 480; QData/FAME01V.PAL; highscore background</td>
 </tr>
 <tr>
 <td>QData/FAME01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/FAME01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/FAME02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>highscore widgets</td>
+<td>QData/FAME02V.TAB; QData/FAME01V.PAL; highscore widgets (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/FAME02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/FAME02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/FAX01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>fax background</td>
+<td>640 x 480; QData/FAX01V.PAL; fax background</td>
 </tr>
 <tr>
 <td>QData/FAX01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/FAX01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/FAX02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>fax widgets</td>
+<td>QData/FAX02V.TAB; QData/FAX01V.PAL; fax widgets (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/FAX02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/FAX02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/GHOST1.DAT</td>
 <td>Ghost</td>
-<td>the ghost-files are all exactly 64kb in size</td>
+<td>64 KB; ghost shadow maps; QData/GHOST2.DAT, QData/GHOST66.DAT</td>
 </tr>
 <tr>
 <td>QData/GHOST2.DAT</td>
 <td>Ghost</td>
-<td></td>
+<td>64 KB; ghost shadow maps</td>
 </tr>
 <tr>
 <td>QData/GHOST66.DAT</td>
 <td>Ghost</td>
-<td>has something todo with ingame shadow-casting</td>
+<td>64 KB; special ghost for shadow-casting</td>
 </tr>
 <tr>
 <td>QData/GRAPH01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>charts background</td>
+<td>640 x 480; QData/GRAPH01V.PAL; charts background</td>
 </tr>
 <tr>
 <td>QData/GRAPH01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/GRAPH01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/GRAPH02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>charts widgets</td>
+<td>QData/GRAPH02V.TAB; QData/GRAPH01V.PAL; charts widgets (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/GRAPH02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/GRAPH02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/LETTR02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>Final palette from WINLEVEL.SMK with Red/Blue swap; letter widgets</td>
+<td>QData/LETTR02V.TAB; Final palette from WINLEVEL.SMK with Red/Blue swap; letter widgets</td>
 </tr>
 <tr>
 <td>QData/LETTR02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/LETTR02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/LOAD01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>the loading-cd-image with size 640 x 480; QData/LOAD01V.PAL</td>
+<td>640 x 480; QData/LOAD01V.PAL; loading-cd-image with size 640 x 480</td>
 </tr>
 <tr>
 <td>QData/LOAD01V.PAL</td>
 <td>Palette</td>
-<td>QData/LOAD01V.DAT; QData/LOAD02V.DAT</td>
+<td>QData/LOAD01V.DAT; QData/LOAD02V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/LOAD02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>QData/LOAD01V.PAL; QData/LOAD02V.TAB; ok/cancel-Dialog widget graphics; probably used for “Insert CD” or something</td>
+<td>QData/LOAD02V.TAB; QData/LOAD01V.PAL; ok/cancel-Dialog widget graphics (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/LOAD02V.TAB</td>
 <td>Spritetable</td>
-<td>QData/LOAD02V.DAT</td>
+<td>QData/LOAD02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/MAIN01M.DAT</td>
@@ -1057,37 +1129,37 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>QData/MAIN01M.PAL</td>
 <td>Palette</td>
-<td>QData/MAIN01M.DAT; QData/MAIN02M.DAT</td>
+<td>QData/MAIN01M.DAT; QData/MAIN02M.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/MAIN02M.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>QData/MAIN01M.PAL; QData/MAIN02M.TAB; main menu overlay (the doctors arm &amp; pointer)</td>
+<td>QData/MAIN02M.TAB; QData/MAIN01M.PAL; main menu overlay (doctors arm & pointer) (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/MAIN02M.TAB</td>
 <td>Spritetable</td>
-<td>QData/MAIN02M.DAT</td>
+<td>QData/MAIN02M.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/POL01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>policy background</td>
+<td>640 x 480; QData/POL01V.PAL; policy background</td>
 </tr>
 <tr>
 <td>QData/POL01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/POL01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/POL02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>policy widgets</td>
+<td>QData/POL02V.TAB; QData/POL01V.PAL; policy widgets (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/POL02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/POL02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/FONT00V.DAT</td>
@@ -1582,142 +1654,142 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>QData/REQ00V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>data/mpalette.dat; the REQXXV.DAT files contain various widget/panel elements – for instance for the staff hiring dialog</td>
+<td>QData/REQ00V.TAB; Data/MPALETTE.DAT; widget/panel elements (extended chunks) - e.g. staff hiring dialog</td>
 </tr>
 <tr>
 <td>QData/REQ00V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/REQ00V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/REQ01V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>QData/REQ01V.TAB; QData/REQ01V.PAL; widget/panel elements (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/REQ01V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/REQ01V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/REQ02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>QData/REQ02V.TAB; QData/REQ02V.PAL; widget/panel elements (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/REQ02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/REQ02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/REQ03V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>QData/REQ03V.TAB; QData/REQ03V.PAL; widget/panel elements (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/REQ03V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/REQ03V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/REQ04V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>QData/REQ04V.TAB; QData/REQ04V.PAL; widget/panel elements (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/REQ04V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/REQ04V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/REQ05V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>QData/REQ05V.TAB; QData/REQ05V.PAL; widget/panel elements (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/REQ05V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/REQ05V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/REQ06V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>QData/REQ06V.TAB; QData/REQ06V.PAL; widget/panel elements (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/REQ06V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/REQ06V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/REQ09V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>QData/REQ09V.TAB; QData/REQ09V.PAL; widget/panel elements (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/REQ09V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/REQ09V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/REQ10V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>QData/REQ10V.TAB; QData/REQ10V.PAL; widget/panel elements (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/REQ10V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/REQ10V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/REQ11V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>QData/REQ11V.TAB; QData/REQ11V.PAL; widget/panel elements (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/REQ11V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/REQ11V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/REQ12V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>QData/REQ12V.TAB; QData/REQ12V.PAL; widget/panel elements (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/REQ12V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/REQ12V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/REQ13V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td></td>
+<td>QData/REQ13V.TAB; QData/REQ13V.PAL; widget/panel elements (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/REQ13V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/REQ13V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/RES01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>research background</td>
+<td>640 x 480; QData/RES01V.PAL; research background</td>
 </tr>
 <tr>
 <td>QData/RES01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/RES01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/RES02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>research widgets</td>
+<td>QData/RES02V.TAB; QData/RES01V.PAL; research widgets (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/RES02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/RES02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/SCORE01V.DAT</td>
@@ -1727,21 +1799,21 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>QData/SCORE01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/SCORE01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/SPOINTER.DAT</td>
 <td>Graphics/Chunks</td>
-<td>palette?; QData/SPOINTER.TAB; contains various mouse cursors which are used in the special screens</td>
+<td>QData/SPOINTER.TAB; contains various mouse cursors which are used in the special screens</td>
 </tr>
 <tr>
 <td>QData/SPOINTER.TAB</td>
 <td>Spritetable</td>
-<td>each pointer uses a different palette, depending on which screen they are used:<p></p>
+<td>QData/SPOINTER.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h); each pointer uses a different palette, depending on which screen they are used:<p></p>
 <ul>
 <li>0-1: QData/AREA01V.PAL or QData/BRIEF01V.PAL</li>
 <li>2-3: QData/PREF01V.PAL</li>
-<li>4-5: QData/DRUGN01V.pal</li>
+<li>4-5: QData/DRUGN01V.PAL</li>
 <li>6-7: QData/FAX01V.PAL</li>
 <li>8-9: QData/GRAPH01V.PAL</li>
 <li>12-13: QData/TOWN01V.PAL</li>
@@ -1760,92 +1832,92 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>QData/STAFF01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>staff-screen background</td>
+<td>640 x 480; QData/STAFF01V.PAL; staff-screen background</td>
 </tr>
 <tr>
 <td>QData/STAFF01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/STAFF01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/STAFF02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>staff-screen widgets</td>
+<td>QData/STAFF02V.TAB; QData/STAFF01V.PAL; staff-screen widgets (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/STAFF02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/STAFF02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/STAT01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>statements background</td>
+<td>640 x 480; QData/STAT01V.PAL; statements background</td>
 </tr>
 <tr>
 <td>QData/STAT01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/STAT01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/STAT02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>statements widgets</td>
+<td>QData/STAT02V.TAB; QData/STAT01V.PAL; statements widgets (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/STAT02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/STAT02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/TITLE01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>title-image (640 x 480); the picture where the game asks for your name; QData/TITLE01V.PAL</td>
+<td>640 x 480; QData/TITLE01V.PAL; title-image (640 x 480); the picture where the game asks for your name</td>
 </tr>
 <tr>
 <td>QData/TITLE01V.PAL</td>
 <td>Palette</td>
-<td>QData/TITLE01V.DAT</td>
+<td>QData/TITLE01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/TOWN.DAT</td>
-<td></td>
-<td>unknown</td>
+<td>Graphics/Raw</td>
+<td>town map data (format unknown)</td>
 </tr>
 <tr>
 <td>QData/TOWN01V.DAT</td>
 <td>Graphics/Raw</td>
-<td>town map background</td>
+<td>640 x 480; QData/TOWN01V.PAL; town map background</td>
 </tr>
 <tr>
 <td>QData/TOWN01V.PAL</td>
 <td>Palette</td>
-<td></td>
+<td>QData/TOWN01V.DAT; 256 RGB triples (6-bit RGB, 768 bytes)</td>
 </tr>
 <tr>
 <td>QData/TOWN02V.DAT</td>
 <td>Graphics/Extended Chunks</td>
-<td>town map widgets</td>
+<td>QData/TOWN02V.TAB; QData/TOWN01V.PAL; town map widgets (extended chunks)</td>
 </tr>
 <tr>
 <td>QData/TOWN02V.TAB</td>
 <td>Spritetable</td>
-<td></td>
+<td>QData/TOWN02V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QData/VER00V.DAT</td>
-<td></td>
-<td>unknown (probably ext chunks)</td>
+<td>Graphics/Extended Chunks</td>
+<td>version data (extended chunks format); QData/VER00V.TAB</td>
 </tr>
 <tr>
 <td>QData/VER00V.TAB</td>
-<td></td>
-<td>unknown (probably spritetable)</td>
+<td>Spritetable</td>
+<td>QData/VER00V.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h)</td>
 </tr>
 <tr>
 <td>QDataM/FACE01M.DAT</td>
 <td>Graphics/Raw</td>
-<td>32 x 665; data/mpalette.dat; this file contains the lowres staff’s potraits. it consits of 54 pieces, where each piece is 32 in width and ther following height:<p></p>
+<td>32 x 665; Data/MPALETTE.DAT; lowres staff portraits; consists of 54 pieces, where each piece is 32 in width and the following height:<p></p>
 <ul>
 <li>first 18 images (foreheads): 14 px</li>
 <li>following 18 images (faces): 12 px</li>
@@ -1856,53 +1928,53 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 </tr>
 <tr>
 <td>QDataM/FONT100M.DAT</td>
-<td></td>
-<td></td>
+<td>Graphics/Chunks</td>
+<td>Font glyphs (Graphics/Chunks); paired with FONT100M.TAB; lowres</td>
 </tr>
 <tr>
 <td>QDataM/FONT100M.TAB</td>
-<td></td>
-<td></td>
+<td>Spritetable</td>
+<td>QDataM/FONT100M.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h); lowres</td>
 </tr>
 <tr>
 <td>QDataM/FONT101M.DAT</td>
-<td></td>
-<td></td>
+<td>Graphics/Chunks</td>
+<td>Font glyphs (Graphics/Chunks); paired with FONT101M.TAB; lowres</td>
 </tr>
 <tr>
 <td>QDataM/FONT101M.TAB</td>
-<td></td>
-<td></td>
+<td>Spritetable</td>
+<td>QDataM/FONT101M.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h); lowres</td>
 </tr>
 <tr>
 <td>QDataM/FONT130M.DAT</td>
-<td></td>
-<td></td>
+<td>Graphics/Chunks</td>
+<td>Font glyphs (Graphics/Chunks); paired with FONT130M.TAB; lowres</td>
 </tr>
 <tr>
 <td>QDataM/FONT130M.TAB</td>
-<td></td>
-<td></td>
+<td>Spritetable</td>
+<td>QDataM/FONT130M.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h); lowres</td>
 </tr>
 <tr>
 <td>QDataM/FONT131M.DAT</td>
-<td></td>
-<td></td>
+<td>Graphics/Chunks</td>
+<td>Font glyphs (Graphics/Chunks); paired with FONT131M.TAB; lowres</td>
 </tr>
 <tr>
 <td>QDataM/FONT131M.TAB</td>
-<td></td>
-<td></td>
+<td>Spritetable</td>
+<td>QDataM/FONT131M.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h); lowres</td>
 </tr>
 <tr>
 <td>QDataM/FONT132M.DAT</td>
-<td></td>
-<td></td>
+<td>Graphics/Chunks</td>
+<td>Font glyphs (Graphics/Chunks); paired with FONT132M.TAB; lowres</td>
 </tr>
 <tr>
 <td>QDataM/FONT132M.TAB</td>
-<td></td>
-<td></td>
+<td>Spritetable</td>
+<td>QDataM/FONT132M.DAT; 6 bytes/entry (uint32 offset, uint8 w, uint8 h); lowres</td>
 </tr>
 <tr>
 <td>Save/ALEX.h8</td>
@@ -1932,32 +2004,32 @@ Many files are of the form “directory/filenameV.ext” and have sometimes coun
 <tr>
 <td>Sound/Data/Sound-0.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>English sound samples (language 0)</td>
 </tr>
 <tr>
 <td>Sound/Data/Sound-1.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>French sound samples (language 1)</td>
 </tr>
 <tr>
 <td>Sound/Data/Sound-2.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>German sound samples (language 2)</td>
 </tr>
 <tr>
 <td>Sound/Data/Sound-3.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>Italian sound samples (language 3)</td>
 </tr>
 <tr>
 <td>Sound/Data/Sound-4.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>Spanish sound samples (language 4)</td>
 </tr>
 <tr>
 <td>Sound/Data/Sound-5.dat</td>
 <td>Sound</td>
-<td>sound samples used in TH</td>
+<td>Swedish sound samples (language 5)</td>
 </tr>
 <tr>
 <td>Sound/Midi/ATLANTIS.XMI</td>
